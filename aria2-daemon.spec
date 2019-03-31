@@ -12,7 +12,7 @@ Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 
 
-Requires:       aria2 >= 2.7
+Requires:       aria2 >= 1.7
 Requires:       jellyfin >= 10.0
 
 
@@ -28,8 +28,8 @@ mkdir -p %{buildroot}%{_sharedstatedir}/aria2d
 mkdir -p %{buildroot}%{_datarootdir}/aria2d
 
 %{__install} -D -m 0644 -p aria2d.service %{buildroot}%{_unitdir}/aria2d.service
-%{__install} -D -m 0644 -p etc/aria2d/aria2d.conf -t %{buildroot}%{_sysconfdir}/aria2d
-copy -r ariang %{buildroot}%{_datarootdir}/aria2d/
+%{__install} -D -m 0640 -p etc/aria2d/aria2d.conf -t %{buildroot}%{_sysconfdir}/aria2d
+cp -r ariang %{buildroot}%{_datarootdir}/aria2d/
 
 %preun
 systemctl stop aria2d.service
@@ -38,7 +38,7 @@ systemctl stop aria2d.service
 %files
 %defattr(-,root,root,-)
 %{_unitdir}/aria2d.service
-%{buildroot}%{_datarootdir}/aria2d
+%{_datarootdir}/aria2d
 %doc etc/nginx/aria2d.conf
 %defattr(-,jellyfin,jellyfin,-)
 %dir %{_sharedstatedir}/aria2d
