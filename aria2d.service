@@ -1,0 +1,16 @@
+[Unit]
+Description=Aria2 rpc service
+After=network.target nginx.service
+
+[Service]
+Type=simple
+User=jellyfin
+Group=jellyfin
+StateDirectory=aria2d
+ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2d/aria2d.conf
+KillSignal=SIGINT
+KillMode=process
+
+
+[Install]
+WantedBy=multi-user.target
