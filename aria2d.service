@@ -10,7 +10,8 @@ StateDirectory=aria2d
 ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2d/aria2d.conf
 KillSignal=SIGINT
 KillMode=process
-
+LimitNOFILE=10000
+StandardOutput=null
 
 [Install]
 WantedBy=multi-user.target
